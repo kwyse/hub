@@ -1,4 +1,6 @@
-#![feature(conservative_impl_trait)]
+#![feature(plugin)]
+#![plugin(rocket_codegen)]
+
 
 #[macro_use]
 extern crate diesel;
@@ -12,6 +14,8 @@ extern crate slog;
 extern crate config;
 extern crate r2d2;
 extern crate r2d2_diesel;
+extern crate rocket;
+extern crate rocket_contrib;
 extern crate regex;
 extern crate serde;
 extern crate slog_async;
@@ -22,6 +26,7 @@ use slog_async::Async;
 use slog_term::{FullFormat, TermDecorator};
 
 mod db;
+mod routes;
 mod settings;
 
 fn main() {
@@ -32,5 +37,10 @@ fn main() {
     let logger = &Logger::root(drain, o!());
 
     let settings = &settings::load(logger);
-    let _ = db::establish_pool(settings).unwrap();
+    let connection_pool = db::establish_pool(settings).unwrap();
+
+    rocket::ignite()
+        .manage(connection_pool)
+        .mount("/api", routes::api::get())
+        .launch();
 }
