@@ -6,14 +6,14 @@ const CONFIG_FILE: &'static str = "config";
 
 #[derive(Debug, Default, Deserialize)]
 pub struct Settings {
-    database: DatabaseSettings,
-    api_key: String,
+    pub database: DatabaseSettings,
+    pub api_key: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct DatabaseSettings {
-    url: String,
-    pool_size: u32,
+    pub url: String,
+    pub pool_size: u32,
 }
 
 impl Default for DatabaseSettings {

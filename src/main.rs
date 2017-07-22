@@ -1,9 +1,17 @@
+#![feature(conservative_impl_trait)]
+
+#[macro_use]
+extern crate diesel;
+#[macro_use]
+extern crate diesel_codegen;
 #[macro_use]
 extern crate serde_derive;
 #[macro_use]
 extern crate slog;
 
 extern crate config;
+extern crate r2d2;
+extern crate r2d2_diesel;
 extern crate regex;
 extern crate serde;
 extern crate slog_async;
@@ -13,6 +21,7 @@ use slog::{Drain, Logger};
 use slog_async::Async;
 use slog_term::{FullFormat, TermDecorator};
 
+mod db;
 mod settings;
 
 fn main() {
@@ -22,5 +31,6 @@ fn main() {
         .fuse();
     let logger = &Logger::root(drain, o!());
 
-    let _ = settings::load(logger);
+    let settings = &settings::load(logger);
+    let _ = db::establish_pool(settings).unwrap();
 }
