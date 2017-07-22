@@ -1,4 +1,4 @@
-DATABASE_URL=`sed -n -e 's/^.*url: //p' config.yml`
+DATABASE_URL=`sed -n -e 's/^.*database_url: //p' config.yml`
 
 default: check
 

@@ -12,15 +12,15 @@ pub struct Settings {
 
 #[derive(Debug, Deserialize)]
 pub struct DatabaseSettings {
-    pub url: String,
-    pub pool_size: u32,
+    pub database_url: String,
+    pub database_pool_size: u32,
 }
 
 impl Default for DatabaseSettings {
     fn default() -> Self {
         Self {
-            url: String::default(),
-            pool_size: 3,
+            database_url: String::default(),
+            database_pool_size: 3,
         }
     }
 }
@@ -34,11 +34,11 @@ pub fn load(logger: &Logger) -> Settings {
         .unwrap_or(Settings::default());
 
     info!(logger, "API key: {}", settings.api_key);
-    info!(logger, "Database URL: {}", settings.database.url);
+    info!(logger, "Database URL: {}", settings.database.database_url);
     info!(
         logger,
         "Database pool size: {}",
-        settings.database.pool_size
+        settings.database.database_pool_size
     );
 
     validate(&settings, logger);
@@ -51,8 +51,8 @@ fn validate(settings: &Settings, logger: &Logger) {
     }
 
     let matcher = Regex::new(r"^postgres://\w+").unwrap();
-    if !matcher.is_match(&settings.database.url) {
-        crit!(logger, "Database URL is not a recognised format");
+    if !matcher.is_match(&settings.database.database_url) {
+        crit!(logger, "Database URL is not in a recognised format");
     }
 }
 

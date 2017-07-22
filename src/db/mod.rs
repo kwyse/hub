@@ -11,9 +11,9 @@ type PoolConnectionResult = Result<Pool<ConnectionManager<PgConnection>>, Initia
 
 pub fn establish_pool(settings: &Settings) -> PoolConnectionResult {
     let config = Config::builder()
-        .pool_size(settings.database.pool_size)
+        .pool_size(settings.database.database_pool_size)
         .build();
 
-    let manager = ConnectionManager::<PgConnection>::new(settings.database.url.clone());
+    let manager = ConnectionManager::<PgConnection>::new(settings.database.database_url.clone());
     Pool::new(config, manager)
 }
