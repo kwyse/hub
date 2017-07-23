@@ -7796,7 +7796,21 @@ var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
 var _kwyse$hub$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
-	_elm_lang$html$Html$text('Hello, world!'));
+	A2(
+		_elm_lang$html$Html$body,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('We\'ll be back soon!'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}));
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};

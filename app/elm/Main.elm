@@ -1,6 +1,8 @@
 module Main exposing (..)
 
-import Html exposing (text)
+import Html exposing (body, h1, text)
 
 main =
-  text "Hello, world!"
+  body []
+  [ h1 [] [ text "We'll be back soon!" ]
+  ]
