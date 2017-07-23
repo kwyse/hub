@@ -8,6 +8,7 @@ use rocket::http::Status;
 use rocket::request::{FromRequest, Outcome as RequestOutcome};
 use std::ops::Deref;
 
+pub mod api;
 pub mod models;
 pub mod schema;
 

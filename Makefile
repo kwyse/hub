@@ -11,6 +11,9 @@ run:
 check:
 	@DATABASE_URL=${DATABASE_URL} cargo check
 
+test:
+	@DATABASE_URL=${DATABASE_URL} cargo test
+
 clean:
 	@DATABASE_URL=${DATABASE_URL} cargo clean
 

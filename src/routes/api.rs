@@ -1,20 +1,18 @@
-use diesel::prelude::*;
 use rocket::{Request, State, Outcome};
 use rocket::http::Status;
 use rocket::request::{FromRequest, Outcome as RequestOutcome};
 use rocket_contrib::{Json, Value};
 use serde::Serialize;
 
+use db::api as db_api;
 use db::DatabaseConnection;
-use db::models::BlogPost;
-use db::schema::blog_posts::dsl::*;
 use settings::Settings;
 
 #[get("/posts/<post_id>")]
 pub fn show(post_id: i32, conn: DatabaseConnection, _key: ApiKey) -> Json<Value> {
-    match blog_posts.find(post_id).first::<BlogPost>(&*conn) {
-        Ok(post) => json_as_success(post),
-        Err(_) => json_as_error("Blog post not found")
+    match db_api::find_post_by_id(post_id, conn) {
+        Some(post) => json_as_success(post),
+        None => json_as_error("Blog post not found")
     }
 }
 
