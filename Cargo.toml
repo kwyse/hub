@@ -2,6 +2,7 @@
 authors = ["Krishan Wyse <kwysek@gmail.com>"]
 name = "hub"
 version = "0.1.0"
+build = "build.rs"
 
 [dependencies]
 r2d2 = "0.7.3"
@@ -26,3 +27,7 @@ version = "0.14.1"
 [dependencies.diesel_codegen]
 features = ["postgres"]
 version = "0.14.0"
+
+[build-dependencies.diesel]
+features = ["postgres"]
+version = "0.14.1"

@@ -1,0 +1,14 @@
+language: rust
+sudo: required
+rust:
+  - nightly
+cache: cargo
+addons:
+  postgres: '9.4'
+before_script:
+  - export PATH=$HOME/.local/bin:$PATH
+  - export DATABASE_URL=postgres://postgres@localhost
+  - psql -c "CREATE DATABASE test;" -U postgres
+branches:
+  only:
+    - master
