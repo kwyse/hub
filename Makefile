@@ -1,6 +1,6 @@
 DATABASE_URL=`sed -n -e 's/^.*database_url: //p' config.yml`
 
-default: check
+default: lint
 
 build:
 	@DATABASE_URL=${DATABASE_URL} cargo build
@@ -8,14 +8,11 @@ build:
 run:
 	@DATABASE_URL=${DATABASE_URL} cargo run
 
-check:
-	@DATABASE_URL=${DATABASE_URL} cargo check
-
 test:
 	@DATABASE_URL=${DATABASE_URL} cargo test
 
 lint:
-	@DATABASE_URL=${DATABASE_URL} cargo build --features 'clippy'
+	@DATABASE_URL=${DATABASE_URL} cargo check --features 'clippy'
 
 clean:
 	@DATABASE_URL=${DATABASE_URL} cargo clean

@@ -11,12 +11,12 @@ use settings::Settings;
 #[get("/posts/<post_id>")]
 pub fn show(post_id: i32, conn: DatabaseConnection, _key: ApiKey) -> Json<Value> {
     match db_api::find_post_by_id(post_id, conn) {
-        Some(post) => json_as_success(post),
+        Some(post) => json_as_success(&post),
         None => json_as_error("Blog post not found")
     }
 }
 
-fn json_as_success<T: Serialize>(data: T) -> Json<Value> {
+fn json_as_success<T: Serialize>(data: &T) -> Json<Value> {
     Json(json!({
         "status": "success",
         "data": data,
