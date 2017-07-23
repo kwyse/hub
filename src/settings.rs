@@ -27,11 +27,11 @@ impl Default for DatabaseSettings {
 
 pub fn load(logger: &Logger) -> Settings {
     // TODO: This should load individual defaults first
-    let settings = Config::new()
+    let settings: Settings = Config::new()
         .merge(File::with_name(CONFIG_FILE))
         .to_result()
         .and_then(|config| config.deserialize())
-        .unwrap_or(Settings::default());
+        .unwrap_or_default();
 
     info!(logger, "API key: {}", settings.api_key);
     info!(logger, "Database URL: {}", settings.database.database_url);

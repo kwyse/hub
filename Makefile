@@ -14,6 +14,9 @@ check:
 test:
 	@DATABASE_URL=${DATABASE_URL} cargo test
 
+lint:
+	@DATABASE_URL=${DATABASE_URL} cargo build --features 'clippy'
+
 clean:
 	@DATABASE_URL=${DATABASE_URL} cargo clean
 
