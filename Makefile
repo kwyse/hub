@@ -19,3 +19,9 @@ db-migrate:
 
 db-redo:
 	@DATABASE_URL=${DATABASE_URL} diesel migration redo
+
+db-revert:
+	@DATABASE_URL=${DATABASE_URL} diesel migration revert
+
+db-reset:
+	@DATABASE_URL=${DATABASE_URL} diesel database reset

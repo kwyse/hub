@@ -6,15 +6,15 @@ use rocket_contrib::{Json, Value};
 use serde::Serialize;
 
 use db::DatabaseConnection;
-use db::models::Article;
-use db::schema::articles::dsl::*;
+use db::models::BlogPost;
+use db::schema::blog_posts::dsl::*;
 use settings::Settings;
 
-#[get("/articles/<article_id>")]
-pub fn show(article_id: i32, conn: DatabaseConnection, _key: ApiKey) -> Json<Value> {
-    match articles.find(article_id).first::<Article>(&*conn) {
-        Ok(article) => json_as_success(article),
-        Err(_) => json_as_error("Article not found")
+#[get("/posts/<post_id>")]
+pub fn show(post_id: i32, conn: DatabaseConnection, _key: ApiKey) -> Json<Value> {
+    match blog_posts.find(post_id).first::<BlogPost>(&*conn) {
+        Ok(post) => json_as_success(post),
+        Err(_) => json_as_error("Blog post not found")
     }
 }
 

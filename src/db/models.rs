@@ -1,5 +1,5 @@
 #[derive(Queryable, Serialize)]
-pub struct Article {
+pub struct BlogPost {
     pub id: i32,
     pub title: String,
     pub body: String,
