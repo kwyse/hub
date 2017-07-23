@@ -6,6 +6,7 @@ build:
 	@DATABASE_URL=${DATABASE_URL} cargo build
 
 run:
+	@$ (cd app && brunch build)
 	@DATABASE_URL=${DATABASE_URL} cargo run
 
 test:

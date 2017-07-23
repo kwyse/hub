@@ -28,6 +28,7 @@ use slog_async::Async;
 use slog_term::{FullFormat, TermDecorator};
 
 use routes::api;
+use routes::index;
 
 mod db;
 mod routes;
@@ -49,6 +50,10 @@ fn main() {
         .manage(settings)
         .mount("/api", routes![
             api::show
+        ])
+        .mount("/", routes![
+            index::index,
+            index::files
         ])
         .launch();
 }
